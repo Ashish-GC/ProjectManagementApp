@@ -1,3 +1,6 @@
         
+        #1 issue : tasks should be stored under projectId  (temporary fix)
+         
+
         task 1 : store data in firebase
         task 2 : shift the state change to redux
