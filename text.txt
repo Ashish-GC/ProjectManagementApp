@@ -1,6 +1,6 @@
         
         #1 issue : tasks should be stored under projectId  (temporary fix)
-         
+          // working fine by storing project id and using filter to match the tasks
 
-        task 1 : store data in firebase
-        task 2 : shift the state change to redux
+        task 1 : store data in firebase (done). 
+        task 2 : shift the state change to redux 
