@@ -1,16 +1,42 @@
 import Sidebar from "./components/Sidebar";
 import NewProject from "./components/NewProject";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NoProjectSelected from "./components/NoProjectSelected";
 import SelectedProject from "./components/SelectedProject";
+import { SendData,fetchData} from "./utils/http";
 
+let initial=true;
 function App() {
   const [projectState, SetprojectState] = useState({
     selectedProjectId: undefined,
     projects: [],
     tasks: [],
   });
- console.log(projectState);
+ //get data
+ useEffect(()=>{
+    const getdata=async ()=>{
+     const data= await fetchData();
+    if(data){
+       SetprojectState({
+        selectedProjectId: undefined,
+        projects: data.projects,
+        tasks: data.task || []
+       })
+    }
+  }
+    getdata();
+ },[])
+
+  //post data
+  useEffect(()=>{
+    if(initial){
+      initial= false;
+      return;
+    }  
+    SendData(projectState);
+  },[projectState])
+
+
   const handleAddTask = (text) => {
     SetprojectState((prevState) => {
       const newTask = {
